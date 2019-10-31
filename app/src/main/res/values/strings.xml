@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Prosfera</string>
     <string name="action_settings">Settings</string>
+    <string name="itemTitle">TextView</string>
+    <string name="itemName">TextView</string>
+    <string name="itemThumbnail">TODO</string>
+    <string name="itemQty">TextView</string>
+    <string name="itemPrice">TextView</string>
+    <string name="todo" />
 </resources>
