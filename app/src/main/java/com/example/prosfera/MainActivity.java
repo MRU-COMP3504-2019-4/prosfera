@@ -1,5 +1,6 @@
 package com.example.prosfera;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -10,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,6 +42,34 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });**/
+    }
+
+    // Gets called to fill information
+    public void fillFragments(ItemList il) {
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ItemFragment iF;
+
+
+        //iF = (ItemFragment) fm.findFragmentByTag("fragment" +i);
+        //iF.fillDetails(il.getItem(i));
+
+        /**
+         // For (size of ItemList), fill fragments with items
+         for (int i = 0; i <= il.getSize(); i++) {
+
+         }**/
+
+
+    }
+
+    public int getPixels(int dpToConvert) {
+
+        Resources r = getResources();
+        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpToConvert, r.getDisplayMetrics());
+
+        return px;
     }
 
     @Override

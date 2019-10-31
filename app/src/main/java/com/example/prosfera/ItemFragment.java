@@ -33,15 +33,12 @@ public class ItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.wishlist_item, container, false);
 
         // Point to elements in fragment
+        // Need to add ID so that new fragments can reference their own components
         itemName = (TextView) view.findViewById(R.id.itemName);
         itemPrice = (TextView) view.findViewById(R.id.itemPrice);
         bar = (ProgressBar) view.findViewById(R.id.progressBar); //progress, max
 
         return view;
-    }
-
-    public void setItemName(String name) {
-        this.itemName.setText(name);
     }
 
     public void fillDetails(Item item) {
