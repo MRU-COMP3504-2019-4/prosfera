@@ -7,6 +7,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.View;
 import android.view.Menu;
@@ -18,11 +20,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ItemList il = new ItemList();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ItemFragment iF;
+
+        ft.add(R.id.fragContainer, new ItemFragment(), "fragment").commit();
+        iF = (ItemFragment) fm.findFragmentByTag("fragment");
+
+        /**
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        String testString = "";
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });**/
     }
 
     @Override
