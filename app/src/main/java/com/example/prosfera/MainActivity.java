@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });**/
+
     }
 
     // Gets called to fill information
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpToConvert, r.getDisplayMetrics());
 
         return px;
+      
     }
 
     @Override
