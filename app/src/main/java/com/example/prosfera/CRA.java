@@ -4,6 +4,7 @@ public class CRA {
     private String websiteAddress;
     private String StmtOfOfficialReceipt;
 
+    // TODO: Should add a comment about why this class is needed
     public CRA(String webAdd)
     {
         this.websiteAddress = webAdd;
