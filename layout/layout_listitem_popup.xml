@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/buttons_item_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/button_details"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="115dp"
+            android:background="@drawable/roundcorners"
+            android:text="Details" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/button_qty_increment"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="16dp"
+            android:src="@android:drawable/ic_input_add"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/button_ok"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@android:drawable/checkbox_on_background"
+            />
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/layout_listitem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/buttons_item_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/button_qty_decrement"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="285dp"
+            android:layout_marginRight="16dp"
+            android:src="@android:drawable/button_onoff_indicator_on"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/button_exit"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@android:drawable/ic_delete"
+            />
+
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>
