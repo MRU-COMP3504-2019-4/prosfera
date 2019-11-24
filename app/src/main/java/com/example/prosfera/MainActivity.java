@@ -89,23 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onFeaturedClick(View view){
-        Log.d(TAG, "onFeaturedClick: card clicked.");
-        Intent i = new Intent(this, Featured.class);
-
-        // instantiate view from which to grab data
-        //final TextView applesInput = findViewById(R.id.applesInput);
-
-        // convert data to string
-        //String usermessage = applesInput.getText().toString();
-
-        // passes this id of featured item to activity
-        // uses itemlist to grab item based on Id
-        i.putExtra("itemId", featuredItem.getItemID());
-
-        startActivity(i);
-    }
-
     // Populates featured item card with information
     private void initFeaturedItem(Item item) {
         // Note: Should featured item be removed from regular wishlist?
