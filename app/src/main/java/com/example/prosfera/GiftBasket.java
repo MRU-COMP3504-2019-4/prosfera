@@ -28,6 +28,7 @@ public class GiftBasket extends AppCompatActivity {
                    donorID,
                    basketItemID;
     private double total;
+    BasketItemList bItems = MainActivity.getBasketItems();
 
     // temp vars for testing
 
@@ -52,7 +53,8 @@ public class GiftBasket extends AppCompatActivity {
         ItemList il = new ItemList(this);
 
         // Populates basket
-        initImageBitmaps();
+        populateBasket();
+        //initImageBitmaps();
 
         // handles if data returned is null
         /**
@@ -98,6 +100,20 @@ public class GiftBasket extends AppCompatActivity {
      */
     public void setDonorID(int dID) { this.donorID = dID; } //might not need
     public void setBasketItemID(int bIID) { this.basketItemID = bIID; } //might not need
+
+
+    public void populateBasket() {
+
+        for ( int i=0 ; i < bItems.getBasketItems().size() ; i++ ) {
+            mImageUrls.add(bItems.getBasketItems().get(i).getImageURL());
+            mNames.add(bItems.getBasketItems().get(i).getName());
+            mPrices.add(bItems.getBasketItems().get(i).getPrice());
+            mProgress.add(bItems.getBasketItems().get(i).getCurrentQty());
+            mQuantities.add(bItems.getItemQtys().get(i));
+        }
+
+        initBasketRecyclerView();
+    }
 
     private void initBasketRecyclerView(){
         Log.d(TAG, "initBasketRecyclerView: called.");

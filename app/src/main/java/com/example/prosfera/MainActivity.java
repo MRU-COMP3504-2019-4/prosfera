@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private ItemList il; //Can't get context prior to onCreate. Initialized below
     private Item featuredItem;
 
+    private static BasketItemList basketItems = new BasketItemList();
+
     // NOTE: Not the best way to load item information
     // (can just point to item in item list and use getters)
     // However, it HAS to be done this way because that's how the RecyclerView is set up
@@ -179,6 +181,10 @@ public class MainActivity extends AppCompatActivity {
 
         initRecyclerView();
 
+    }
+
+    public static BasketItemList getBasketItems() {
+        return basketItems;
     }
 
 }

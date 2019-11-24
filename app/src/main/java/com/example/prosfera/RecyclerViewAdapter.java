@@ -51,6 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<Integer> mQuantities = new ArrayList<>();
     private Context mContext;
     private PopupWindow popup;
+    BasketItemList bItems = MainActivity.getBasketItems();
 
     // TODO: Change objects in constructor, add progressbar and price
     public RecyclerViewAdapter(Context mContext, ArrayList<String> mImageNames, ArrayList<String> mImageUrls, ArrayList<Integer> mPrices, ArrayList<Integer> mProgress,
@@ -96,12 +97,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             if (qtyArray.get(0) instanceof String) {
                 holder.quantity.setText(String.valueOf(qtyArray.get(0)));
             }
-            //ArrayList<String> newQty = new ArrayList<String>();
-            //for (int i = 0; i < qtyArray.size(); i++) {
-            //    newQty.add(qtyArray.get(i).toString());
-            //}
-            //holder.quantity.setText(newQty.get(position));
-            //bindFunc(holder, position);
         } else {
             super.onBindViewHolder(holder,position, qtyArray);
         }
@@ -155,9 +150,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 // Find elements in the popup container
                 TextView name = container.findViewById(R.id.image_name);
                 final EditText qty = container.findViewById(R.id.itemQty);
-                TextView price = container.findViewById(R.id.itemPrice);
+                final TextView price = container.findViewById(R.id.itemPrice);
                 ProgressBar progress = container.findViewById(R.id.progressView);
                 CircleImageView img = container.findViewById(R.id.image);
+
+                final int unitPrice = clickedItem.getPrice();
 
                 // Set data of popup window to match clicked element
                 name.setText(clickedItem.getName());
@@ -197,6 +194,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         int qty_text = Integer.parseInt(qty.getText().toString().trim());
                         qty_text++;
                         qty.setText(Integer.toString(qty_text));
+                        price.setText(Integer.toString((qty_text*unitPrice)));
                     }
                 });
 
@@ -209,6 +207,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                             qty_text--;
                         }
                         qty.setText(Integer.toString(qty_text));
+                        price.setText(Integer.toString((qty_text*unitPrice)));
                     }
                 });
 
@@ -216,9 +215,42 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     @Override
                     public void onClick(View v){
                         Log.d(TAG, "onClick: clicked on okay button");
-                        //mQuantities.set(position, Integer.parseInt(qty.getText().toString().trim()));
-                        //RecyclerViewAdapter.this.notifyItemChanged(position, mQuantities);
-                        RecyclerViewAdapter.this.notifyItemChanged(position, qty.getText().toString().trim());
+
+                        Item foundItem;
+                        Boolean found = false;
+                        int position = 0;
+
+                        int qty_text = Integer.parseInt(qty.getText().toString().trim());
+                        int clickedItemID = clickedItem.getItemID();
+
+                        //ADD TO CART
+                        //check if item exists in basket
+                        if (!bItems.getBasketItems().isEmpty()) {
+                            for (int i = 0; i < bItems.getBasketItems().size(); i++) {
+                                int currID = bItems.getBasketItems().get(i).getItemID();
+                                if (currID == clickedItemID) {
+                                    foundItem = bItems.getBasketItems().get(i);
+                                    found = true;
+                                    position = i;
+                                }
+                            }
+                        }
+
+
+                        if(!found) {
+                        //add new item
+                        Item newItem = new Item(clickedItem.getItemID(), clickedItem.getCurrentQty(),
+                                clickedItem.getName(), clickedItem.getDescription(),
+                                clickedItem.getPrice(), clickedItem.getThreshold());
+
+                        bItems.addToLists(newItem, qty_text);
+                        } else {
+                            //add quantity to existing item
+                            int currQty = bItems.getItemQtys().get(position);
+                            bItems.updateQty((currQty+qty_text), position);
+                        }
+
+
                         popup.dismiss();
                     }
                 });
@@ -227,6 +259,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     @Override
                     public void onClick(View v){
                         Log.d(TAG, "onClick: clicked on exit button");
+                        RecyclerViewAdapter.this.notifyItemChanged(position, qty.getText().toString().trim());
                         popup.dismiss();
                     }
                 });
@@ -236,7 +269,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
-    // size of item list = number of items loaded into recyclerV iew
+    // size of item list = number of items loaded into recyclerView
     @Override
     public int getItemCount() { return mImageNames.size(); }
 
