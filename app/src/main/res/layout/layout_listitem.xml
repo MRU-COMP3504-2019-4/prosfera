@@ -1,94 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/parent_layout"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/wishlistCard"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/parent_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="12dp"
-        android:foregroundGravity="center_horizontal"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp"
-        app:contentPadding="16dp">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:id="@+id/card_innerLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/wishlistCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="12dp"
+            android:foregroundGravity="center_horizontal"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="2dp"
+            app:contentPadding="16dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/ic_launcher" />
-
-            <TextView
-                android:id="@+id/image_name"
+            <RelativeLayout
+                android:id="@+id/card_innerLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_toEndOf="@id/image"
-                android:layout_toRightOf="@id/image"
-                android:text="Canada"
-                android:textColor="#000"
-                android:textSize="16sp" />
+                android:layout_height="match_parent">
 
-            <ProgressBar
-                android:id="@+id/progressView"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="false"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="138dp"
-                android:layout_marginRight="138dp"
-                android:layout_toEndOf="@id/image"
-                android:layout_toRightOf="@+id/image"
-                android:minWidth="160dp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@mipmap/ic_launcher" />
 
-            <EditText
-                android:id="@+id/itemQty"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="-100dp"
-                android:layout_marginTop="-5dp"
-                android:layout_toEndOf="@id/progressView"
-                android:layout_toRightOf="@+id/progressView"
-                android:ems="2"
-                android:gravity="right"
-                android:inputType="number"
-                android:singleLine="true"
-                android:text="1"
-                android:textColor="#919191"
-                android:textColorHint="#ADADAD"
-                android:textSize="22sp" />
+                <TextView
+                    android:id="@+id/image_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_toEndOf="@id/image"
+                    android:layout_toRightOf="@id/image"
+                    android:text="Canada"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/itemPrice"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="3dp"
-                android:layout_toRightOf="@id/itemQty"
-                android:text="10"
-                android:textColor="#363636"
-                android:textColorHint="#00000000"
-                android:textSize="22sp" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                <ProgressBar
+                    android:id="@+id/progressView"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="false"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_toEndOf="@id/image"
+                    android:layout_toRightOf="@+id/image" />
 
-</RelativeLayout>
+                <EditText
+                    android:id="@+id/itemQty"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_toEndOf="@id/progressView"
+                    android:layout_toRightOf="@+id/progressView"
+                    android:ems="2"
+                    android:gravity="right"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:text="1"
+                    android:textColor="#919191"
+                    android:textColorHint="#ADADAD"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/itemPrice"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_toEndOf="@id/itemQty"
+                    android:layout_toRightOf="@+id/itemQty"
+                    android:text="10"
+                    android:textColor="#363636"
+                    android:textColorHint="#00000000"
+                    android:textSize="22sp" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</ScrollView>

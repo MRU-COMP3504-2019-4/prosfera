@@ -1,15 +1,24 @@
 package com.example.prosfera;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class GiftBasket extends AppCompatActivity {
 
@@ -28,6 +37,9 @@ public class GiftBasket extends AppCompatActivity {
     private ArrayList<Integer> mProgress = new ArrayList<>();
     private ArrayList<Integer> mQuantities  = new ArrayList<>();
 
+    //Created as globals to be used in onSwipe and onChildDraw (Swipe to delete)
+    RecyclerViewAdapter adapter1;
+    RecyclerView rv1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +69,7 @@ public class GiftBasket extends AppCompatActivity {
         // instantiate views and set text
         //final TextView detailsTitle = findViewById(R.id.detailsTitle);
         //detailsTitle.setText(itemName);
+
     }
 //database connection here
 
@@ -89,14 +102,17 @@ public class GiftBasket extends AppCompatActivity {
     private void initBasketRecyclerView(){
         Log.d(TAG, "initBasketRecyclerView: called.");
 
-        RecyclerView rv1 = findViewById(R.id.basketRecycler);
+        rv1 = findViewById(R.id.basketRecycler);
 
         // TODO: Conditionally load data structures (wishlistNames or basketNames)
 
-        RecyclerViewAdapter adapter1 = new RecyclerViewAdapter(this, mNames, mImageUrls, mPrices, mProgress, mQuantities);
+        adapter1 = new RecyclerViewAdapter(this, mNames, mImageUrls, mPrices, mProgress, mQuantities);
         rv1.setAdapter(adapter1);
         rv1.setLayoutManager(new LinearLayoutManager(this));
         rv1.setHasFixedSize(true);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallBack);
+        itemTouchHelper.attachToRecyclerView(rv1);
     }
 
     // FOR TESTING
@@ -154,4 +170,56 @@ public class GiftBasket extends AppCompatActivity {
 
     }
 
+    /*
+     * This section of code is to attach the "Swipe-to-delete" functionality on the Gift Basket.
+     * Custom libraries are used to create the "undo" Snackbar and decoration when an item is slid to the left.
+     * Taken from https://www.youtube.com/watch?v=rcSNkSJ624U
+     */
+    ItemTouchHelper.SimpleCallback simpleCallBack = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            final int position = viewHolder.getAdapterPosition();
+            if(direction == ItemTouchHelper.LEFT) {
+                    //Stores and removes the elements of the deleted item
+                    final String delName = mNames.remove(position);
+                    final String delURL = mImageUrls.remove(position);
+                    final int delPrice = mPrices.remove(position);
+                    final int delProgress = mProgress.remove(position);
+                    final int delQty = mQuantities.remove(position);
+
+                    adapter1.notifyItemRemoved(position);
+                    Snackbar.make(rv1, "Removed from Basket", Snackbar.LENGTH_LONG)
+                        .setAction("Undo", new View.OnClickListener(){
+
+                            //If undo is clicked, add the elements back into their arrays
+                            @Override
+                            public void onClick(View view) {
+                                mNames.add(position, delName);
+                                mImageUrls.add(position, delURL);
+                                mPrices.add(position, delPrice);
+                                mProgress.add(position, delProgress);
+                                mQuantities.add(position, delQty);
+                                adapter1.notifyItemInserted(position);
+                            }
+                        }).show();
+            }
+        }
+        //This creates the background color and delete icon underneath a swiped item
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder,
+                                float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(recyclerView.getContext(), R.color.colorAccent))
+                    .addSwipeLeftActionIcon(R.drawable.ic_delete_black_24dp)
+                    .create()
+                    .decorate();
+
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
 }

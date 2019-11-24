@@ -1,65 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/basketParent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="12dp">
+    android:layout_height="wrap_content">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/basketRecycler"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/basketParent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/basketHeader"
-        android:layout_marginBottom="16dp" />
+        android:layout_height="match_parent"
+        android:padding="12dp">
 
-    <TextView
-        android:id="@+id/basketHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/basketHeader_text"
-        android:textColor="#000000"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/basketRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/basketHeader"
+            android:layout_marginBottom="16dp" />
 
-    <TextView
-        android:id="@+id/totalPriceSubtitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/basketTotalPrice"
-        android:layout_toLeftOf="@id/basketTotalPrice"
-        android:foregroundGravity="right"
-        android:gravity="right"
-        android:text="@string/totalSubtitle" />
+        <TextView
+            android:id="@+id/basketHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/basketHeader_text"
+            android:textColor="#000000"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/basketTotalPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/basketRecycler"
-        android:layout_alignRight="@id/basketRecycler"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="24dp"
-        android:foregroundGravity="right"
-        android:gravity="right"
-        android:text="@string/cartTotal"
-        android:textColor="#000000"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/totalPriceSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/basketTotalPrice"
+            android:layout_toLeftOf="@id/basketTotalPrice"
+            android:foregroundGravity="right"
+            android:gravity="right"
+            android:text="@string/totalSubtitle" />
 
-    <Button
-        android:id="@+id/goBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/backBtn_text" />
+        <TextView
+            android:id="@+id/basketTotalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/basketRecycler"
+            android:layout_alignRight="@id/basketRecycler"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="24dp"
+            android:foregroundGravity="right"
+            android:gravity="right"
+            android:text="@string/cartTotal"
+            android:textColor="#000000"
+            android:textSize="32sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/Checkout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/goBack"
-        android:text="@string/checkoutBtn_text" />
+        <Button
+            android:id="@+id/goBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/backBtn_text" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/Checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/goBack"
+            android:text="@string/checkoutBtn_text" />
+
+    </RelativeLayout>
+</ScrollView>

@@ -2,6 +2,10 @@ package com.example.prosfera;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -9,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -119,10 +124,33 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
 
+                ViewGroup root = (ViewGroup) v.getRootView();
+
                 // Inflates 'layout_listitem_popup.xml' as a centered popup window
-                View container = LayoutInflater.from(mContext).inflate(R.layout.layout_listitem_popup, null);
+                View container = LayoutInflater.from(mContext).inflate(R.layout.layout_listitem_popup, root, false);
                 popup = new PopupWindow(container, ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.WRAP_CONTENT);
+
+                // Closes the popup window when touch outside.
+                popup.setOutsideTouchable(true);
+                popup.setFocusable(true);
+                // Removes default background.
+                popup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
                 popup.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+                View parent;
+                if (android.os.Build.VERSION.SDK_INT > 22) {
+                    parent = (View) popup.getContentView().getParent().getParent();
+                }else{
+                    parent = (View) popup.getContentView().getParent();
+                }
+                //dim the window in the background
+                WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+                WindowManager.LayoutParams p = (WindowManager.LayoutParams) parent.getLayoutParams();
+                p.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+                p.dimAmount = 0.4f;
+                wm.updateViewLayout(parent, p);
+
 
                 // Find elements in the popup container
                 TextView name = container.findViewById(R.id.image_name);
@@ -137,13 +165,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 qty.setText("1");
                 price.setText(Integer.toString(clickedItem.getPrice())); //calculated total?
                 progress.setProgress(clickedItem.getCalculatedPerc());
+                Glide.with(mContext)
+                        .asBitmap()
+                        .load(mImageUrls.get(position))
+                        .into(img);
 
                 // Find button elements of popup container
                 TextView details = container.findViewById(R.id.button_details);
-                CircleImageView qty_increment = container.findViewById(R.id.button_qty_increment);
-                CircleImageView qty_decrement = container.findViewById(R.id.button_qty_decrement);
-                CircleImageView okay_button = container.findViewById(R.id.button_ok);
-                CircleImageView exit_button =container.findViewById(R.id.button_exit);
+                ImageButton qty_increment = container.findViewById(R.id.button_qty_increment);
+                ImageButton qty_decrement = container.findViewById(R.id.button_qty_decrement);
+                ImageButton okay_button = container.findViewById(R.id.button_ok);
+                ImageButton exit_button =container.findViewById(R.id.button_exit);
 
                 details.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -199,13 +231,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     }
                 });
 
-                container.setOnTouchListener(new View.OnTouchListener(){
-                    @Override
-                    public boolean onTouch(View view, MotionEvent motionEvent) {
-                        popup.dismiss();
-                        return true;
-                    }
-                });
             }
         });
     }

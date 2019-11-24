@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
     private void initFeaturedItem(Item item) {
         // Note: Should featured item be removed from regular wishlist?
         this.featuredItem = item;
-      
 
         // initialize views
         final TextView featuredDescription = findViewById(R.id.featuredDescription);
@@ -122,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
                 .asBitmap()
                 .load(item.getImageURL())
                 .into(featuredImage);
+
+        // give featured parent an onclick
+
 
         // Should we dispose of the text/image views after we're done using them? Probably?
     }
