@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView featuredDescription = findViewById(R.id.featuredDescription);
         final TextView featuredTitle = findViewById(R.id.featuredTitle);
         final ImageView featuredImage = findViewById(R.id.featuredPic);
+        final CardView featuredCard = findViewById(R.id.featuredCard);
 
         // set their contents
         featuredTitle.setText(item.getName());
@@ -125,6 +126,19 @@ public class MainActivity extends AppCompatActivity {
                 .into(featuredImage);
 
         // give featured parent an onclick
+        featuredCard.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: featured item clicked");
+
+                Intent intent = new Intent(MainActivity.this, ItemDetails.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("itemObj", featuredItem);
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+            }
+        }));
 
 
         // Should we dispose of the text/image views after we're done using them? Probably?
