@@ -16,4 +16,6 @@
     <string name="backBtn_text">Back</string>
     <string name="cartTotal">84</string>
     <string name="totalSubtitle">incl. tax</string>
+
+    <string name="primaryFont">Roboto</string>
 </resources>

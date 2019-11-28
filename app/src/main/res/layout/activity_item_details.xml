@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_below="@id/details_header"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="12dp" />
 
         <TextView
             android:id="@+id/details_item_name"
@@ -47,7 +47,8 @@
             android:layout_marginBottom="8dp"
             android:text="Item Name"
             android:textColor="@color/textPrimary"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/details_description"
