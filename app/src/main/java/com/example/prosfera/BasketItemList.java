@@ -23,13 +23,41 @@ public class BasketItemList {
         itemQtys.add(newQty);
     }
 
+    //Same as above, but inserts at a given position
+    public void addToLists(Item newItem, int newQty, int position) {
+        basketItems.add(position, newItem);
+        itemQtys.add(position, newQty);
+    }
+
     public void removeFromLists(int position) {
         basketItems.remove(position);
-        itemQtys.remove(itemQtys);
+        itemQtys.remove(position);
+    }
+
+    //Same as removeFromLists, but returns the removed Item
+    public Item deleteFromLists(int position) {
+        Item removed_item = basketItems.remove(position);
+        itemQtys.remove(position); //need to fix quantity issues
+        return removed_item;
     }
 
     public void updateQty(int newQty, int position) {
         itemQtys.set(position, newQty);
+    }
+
+    //finds if an itemID is in the list. Returns -1 if not, and the position of the item if found
+    public int findItemInList(int itemID) {
+        int position = -1;
+
+        if (!basketItems.isEmpty()) {
+            for (int i = 0; i < basketItems.size(); i++) {
+                int currID = basketItems.get(i).getItemID();
+                if (currID == itemID) {
+                    position = i;
+                }
+            }
+        }
+        return position;
     }
 
     @Override

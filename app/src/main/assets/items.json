@@ -5,49 +5,56 @@
       "description" : "Stay warm and cozy all year long with this extra warm fleece blanket. The 2-sided brushed, 100% polyester, polar fleece fabric and 1-inch hem having double needle stitching to make it highly durable and perfect for snuggling. No shrinkage after washing and drying ensures that it stays the same even after multiple wash cycles. Twin size measuring 66 by 90 inches and grey color.",
       "price" : 7,
       "imageURL" : "https://i.imgur.com/AniT1hG.png",
-      "threshold" : 15
+      "threshold" : 20,
+      "availableQty" : 11
     },
     {
       "name" : "Disposable Hand Warmers",
       "description" : "10 individual large size warmer pads, durable to keep long-lasting heat. Provides protection from frostbite in chilly winter and cold nights. Eco-friendly iron ingredients with soft non-woven fabric, air activated. No leaking, no odor.",
       "price" : 6,
       "imageURL" : "https://i.imgur.com/GAXOAsM.png",
-      "threshold" : 25
+      "threshold" : 25,
+      "availableQty" : 10
     },
     {
       "name" : "Portable First Aid Kit",
       "description" : "A First-Aid-Kit with premium medical supplies is an essential for emergency and survival situations. High-quality EVA & Nylon material with full open zipper, waterproof and shock resistant. 112pcs medical supplies and survival tools such as: tweezers, scissors, an emergency blanket, safety pins, and a variety of other medical items such as pads and bandages.",
       "price" : 8,
       "imageURL" : "https://i.imgur.com/A5sXDhK.png",
-      "threshold" : 30
+      "threshold" : 30,
+      "availableQty" : 6
     },
     {
       "name" : "Women's Toiletry Kit",
       "description" : "Grooming and oral care essentials for women. Includes shampoo, conditioner, body wash, deodorant, toothpaste, toothbrush with toothbrush cover, styling comb, and quart size zip top bag.",
       "price" : 6,
       "imageURL" : "https://i.imgur.com/jh2r0lH.png",
-      "threshold" : 20
+      "threshold" : 20,
+      "availableQty" : 8
     },
     {
       "name" : "Men's Toiletry Kit",
       "description" : "Grooming and oral care essentials for men. Includes shaving cream, razor, deodorant, toothpaste, toothbrush with toothbrush cover, mouthwash, styling comb, and quart size zip top bag.",
       "price" : 6,
       "imageURL" : "https://i.imgur.com/FqH8S2L.png",
-      "threshold" : 20
+      "threshold" : 20,
+      "availableQty" : 10
     },
     {
       "name" : "Socks",
       "description" : "A 6 pack of heavy duty socks. Comes in a variety of colors and sizes. Zone cushioning creates an extra durable sock with reinforcement in key wear zones.",
       "price" : 2,
       "imageURL" : "https://i.imgur.com/Uub5LmK.png",
-      "threshold" : 50
+      "threshold" : 50,
+      "availableQty" : 12
     },
     {
       "name" : "Toilet Paper",
       "description" : "An everyday essential that is always in demand. Pack of 12 double rolls. Hypoallergenic and dermatologist approved.",
       "price" : 5,
       "imageURL" : "https://i.imgur.com/wiymuDK.png",
-      "threshold" : 35
+      "threshold" : 35,
+      "availableQty" : 7
     }
   ]
 }

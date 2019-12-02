@@ -30,8 +30,6 @@ public class GiftBasket extends AppCompatActivity {
     private double total;
     BasketItemList bItems = MainActivity.getBasketItems();
 
-    // temp vars for testing
-
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<Integer> mPrices = new ArrayList<>();
@@ -45,35 +43,20 @@ public class GiftBasket extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // TODO: upon merge, change reference to XML file on this line
         setContentView(R.layout.activity_basket);
 
         //Bundle itemData = getIntent().getExtras();
-        ItemList il = new ItemList(this);
 
-        // Populates basket
-        populateBasket();
-        //initImageBitmaps();
-
-        // handles if data returned is null
-        /**
-        if (itemData == null) {
-            return;
-        }**/
-
-        // get info from itemData bundle
-        //int itemId = itemData.getInt("itemId");
-
-        // use itemId to reference item and get its name
-        //String itemName = il.getItem(itemId).getName();
-
-        // instantiate views and set text
-        //final TextView detailsTitle = findViewById(R.id.detailsTitle);
-        //detailsTitle.setText(itemName);
-
+        if(!bItems.getBasketItems().isEmpty()) {
+            // Populates basket
+            populateBasket();
+        }
     }
-//database connection here
+
+    @Override
+    public void onResume(){
+        super.onResume();
+    }
 
     /*
         Constructor Class to initialize variables.
@@ -107,8 +90,8 @@ public class GiftBasket extends AppCompatActivity {
         for ( int i=0 ; i < bItems.getBasketItems().size() ; i++ ) {
             mImageUrls.add(bItems.getBasketItems().get(i).getImageURL());
             mNames.add(bItems.getBasketItems().get(i).getName());
-            mPrices.add(bItems.getBasketItems().get(i).getPrice());
-            mProgress.add(bItems.getBasketItems().get(i).getCurrentQty());
+            mPrices.add(bItems.getBasketItems().get(i).getTotalPrice());
+            mProgress.add(bItems.getBasketItems().get(i).getTempPercent());
             mQuantities.add(bItems.getItemQtys().get(i));
         }
 
@@ -129,61 +112,6 @@ public class GiftBasket extends AppCompatActivity {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallBack);
         itemTouchHelper.attachToRecyclerView(rv1);
-    }
-
-    // FOR TESTING
-    // This is how the basket is being populated
-    private void initImageBitmaps(){
-        Log.d(TAG, "initImageBitmaps: preparing wishlist bitmaps.");
-
-
-        //TODO: add reference to items
-        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNames.add("Havasu Falls");
-        //temporary. These need to change
-        mPrices.add(5);
-        mProgress.add(30);
-        mQuantities.add(1);
-
-        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("Trondheim");
-        //temporary. These need to change
-        mPrices.add(5);
-        mProgress.add(30);
-        mQuantities.add(1);
-
-        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mNames.add("Portugal");
-        //temporary. These need to change
-        mPrices.add(5);
-        mProgress.add(30);
-        mQuantities.add(1);
-
-        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNames.add("Rocky Mountain National Park");
-        //temporary. These need to change
-        mPrices.add(5);
-        mProgress.add(30);
-        mQuantities.add(1);
-
-        /**
-        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mNames.add("Mahahual");
-
-        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mNames.add("Frozen Lake");
-
-        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
-        mNames.add("White Sands Desert");
-
-        mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
-        mNames.add("Austrailia");
-
-        mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mNames.add("Washington");
-        **/
-        initBasketRecyclerView();
-
     }
 
     /*
@@ -207,9 +135,16 @@ public class GiftBasket extends AppCompatActivity {
                     final int delPrice = mPrices.remove(position);
                     final int delProgress = mProgress.remove(position);
                     final int delQty = mQuantities.remove(position);
+                    final Item delItem = bItems.deleteFromLists(position);
+
+                    //reset the progress bar in wishlist if an item has been deleted from basket
+                    ItemList il = MainActivity.getWishlistItems();
+                    final Item del_item_wishlist = il.getItem(il.findItemInList(delItem.getItemID()));
+                    final int del_progress = del_item_wishlist.getTempPercent();
+                    del_item_wishlist.resetTemporaryProgress();
 
                     adapter1.notifyItemRemoved(position);
-                    Snackbar.make(rv1, "Removed from Basket", Snackbar.LENGTH_LONG)
+                    Snackbar.make(rv1, "Removed from Gift Basket", Snackbar.LENGTH_LONG)
                         .setAction("Undo", new View.OnClickListener(){
 
                             //If undo is clicked, add the elements back into their arrays
@@ -221,6 +156,8 @@ public class GiftBasket extends AppCompatActivity {
                                 mProgress.add(position, delProgress);
                                 mQuantities.add(position, delQty);
                                 adapter1.notifyItemInserted(position);
+                                bItems.addToLists(delItem, delQty, position);
+                                del_item_wishlist.setTempProgress(del_progress);
                             }
                         }).show();
             }

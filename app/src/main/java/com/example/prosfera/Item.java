@@ -1,32 +1,24 @@
 package com.example.prosfera;
-
-import android.content.Context;
-
-import java.io.Serializable; //This is needed in order to pass objects using intents (i.e. in ItemDetails activity)
+import java.io.Serializable;
 
 public class Item implements Serializable{
 
-    private int itemID, currentQty, price, threshold, calculatedPerc;
-    private String name, description;
-    private String imageURL; //not sure how an image will be stored
+    private int itemID, threshold, calculatedPerc;
+    //price is the unit price per unit, while total_price tracks price*qty
+    private int price, totalPrice;
+    //currentQty refers to session quantities, while charityQty refers to the total amount raised by the charity
+    private int  currentQty, charityQty;
+    private String name, description, imageURL;
+
+    //tempPercent is used to track temporary progress changes (items in basket that have NOT been
+    //checked out. Once user checks out their cart, calculatedPercent = tempPercent
+    private int tempProgress;
+
     //visible (flag)
     //featured/promoted (flag)
 
     public Item(int itID, int currQty, String nm, String desc, int prce,
-                int thresh) {
-        this.itemID      = itID;
-        this.currentQty  = currQty;
-        this.name        = nm;
-        this.description = desc;
-        this.price       = prce;
-        this.threshold   = thresh;
-        this.imageURL   = null;
-        updatePercentage(); //constructor doesn't really need to update the percentage
-    }
-
-    //Overloading constructor to include image parameter (temporarily?)
-    public Item(int itID, int currQty, String nm, String desc, int prce,
-                int thresh, String image) {
+                int thresh, String image, int charityQ) {
         this.itemID      = itID;
         this.currentQty  = currQty;
         this.name        = nm;
@@ -34,13 +26,16 @@ public class Item implements Serializable{
         this.price       = prce;
         this.threshold   = thresh;
         this.imageURL   = image;
-        updatePercentage(); //constructor doesn't really need to update the percentage
+        this.charityQty = charityQ;
+        updatePercentage();
+        updateTotalPrice();
+
+        //like calculated percent, but includes the default qty of 1 in recyclerViews
+        //(already included in progressbar)
+        tempProgress = ((this.charityQty+1)*100)/this.threshold;
     }
 
-    public int getItemID()
-    {
-        return itemID;
-    }
+    public int getItemID() { return itemID; }
 
     public int getCurrentQty()
     {
@@ -66,10 +61,21 @@ public class Item implements Serializable{
         return imageURL;
     }
 
-    public int getCalculatedPerc()
-    {
+    public int getCalculatedPerc() {
         updatePercentage();
         return calculatedPerc;
+    }
+
+    public int getCharityQty() { return charityQty; }
+
+    public int getTotalPrice() {
+        updateTotalPrice();
+        return totalPrice;
+    }
+
+    public int getTempPercent()
+    {
+        return tempProgress;
     }
 
 
@@ -108,6 +114,23 @@ public class Item implements Serializable{
         imageURL = res_name;
     }
 
-    public void updatePercentage() { this.calculatedPerc = this.currentQty/this.threshold; }
+    public void setCharityQty(int charityQ) { charityQty = charityQ;}
 
+    public void updateTotalPrice() {this.totalPrice = this.currentQty * this.price;}
+
+    public void updatePercentage() { this.calculatedPerc = (this.charityQty*100)/this.threshold; }
+
+    public void setTempProgress(int prog)
+    {
+        this.tempProgress = prog;
+    }
+
+
+    public void addToTemporaryProgress(int qty) {
+        this.tempProgress += ((qty*100)/this.threshold);
+    }
+
+    public void resetTemporaryProgress() {
+        this.tempProgress = this.calculatedPerc;
+    }
 }

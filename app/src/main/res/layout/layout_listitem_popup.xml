@@ -16,7 +16,7 @@
             android:id="@+id/buttons_item_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingRight="16dp"
+            android:paddingRight="26dp"
             android:paddingBottom="12dp"
             android:visibility="visible">
   
@@ -52,7 +52,7 @@
             android:id="@+id/buttons_item_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingRight="16dp"
+            android:paddingRight="26dp"
             android:visibility="visible">
 
             <View

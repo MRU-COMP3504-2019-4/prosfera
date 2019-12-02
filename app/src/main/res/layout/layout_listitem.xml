@@ -27,7 +27,7 @@
             <RelativeLayout
                 android:id="@+id/card_innerLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="50dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/image"
@@ -72,7 +72,10 @@
                     android:layout_toRightOf="@+id/progressView"
                     android:ems="2"
                     android:gravity="right"
-                    android:inputType="number"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:inputType="none"
+                    android:longClickable="false"
                     android:singleLine="true"
                     android:text="1"
                     android:textColor="#919191"
@@ -87,6 +90,7 @@
                     android:layout_marginTop="3dp"
                     android:layout_toEndOf="@id/itemQty"
                     android:layout_toRightOf="@+id/itemQty"
+                    android:gravity="center"
                     android:text="10"
                     android:textColor="@color/textPrimary"
                     android:textColorHint="#00000000"
