@@ -25,88 +25,100 @@
             app:contentPadding="16dp">
 
             <RelativeLayout
-                android:id="@+id/card_innerLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/image"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@mipmap/ic_launcher" />
+                <RelativeLayout
+                    android:id="@+id/card_innerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
 
-                <TextView
-                    android:id="@+id/image_name"
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <TextView
+                        android:id="@+id/image_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_toEndOf="@id/image"
+                        android:layout_toRightOf="@id/image"
+                        android:text="Canada"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressView"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="false"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="34dp"
+                        android:layout_toEndOf="@id/image"
+                        android:layout_toRightOf="@+id/image"
+                        android:paddingRight="135dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/number_layout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_toEndOf="@id/image"
-                    android:layout_toRightOf="@id/image"
-                    android:text="Canada"
-                    android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="-107dp"
+                    android:layout_toRightOf="@id/card_innerLayout">
 
-                <ProgressBar
-                    android:id="@+id/progressView"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="160dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="false"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="34dp"
-                    android:layout_toEndOf="@id/image"
-                    android:layout_toRightOf="@+id/image" />
+                    <EditText
+                        android:id="@+id/itemQty"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="-3dp"
+                        android:clickable="false"
+                        android:ems="2"
+                        android:focusable="false"
+                        android:gravity="right"
+                        android:inputType="none"
+                        android:longClickable="false"
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textColor="#919191"
+                        android:textColorHint="#ADADAD"
+                        android:textSize="24sp" />
 
-                <EditText
-                    android:id="@+id/itemQty"
-                    android:layout_width="40dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="-3dp"
-                    android:layout_toEndOf="@id/progressView"
-                    android:layout_toRightOf="@+id/progressView"
-                    android:ems="2"
-                    android:gravity="right"
-                    android:focusable="false"
-                    android:clickable="false"
-                    android:inputType="none"
-                    android:longClickable="false"
-                    android:singleLine="true"
-                    android:text="1"
-                    android:textColor="#919191"
-                    android:textColorHint="#ADADAD"
-                    android:textSize="24sp" />
+                    <TextView
+                        android:id="@+id/dollarSign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="-24dp"
+                        android:layout_toLeftOf="@id/itemPrice"
+                        android:text="$"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/itemPrice"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_toEndOf="@id/itemQty"
-                    android:layout_toRightOf="@+id/itemQty"
-                    android:gravity="center"
-                    android:text="10"
-                    android:textColor="@color/textPrimary"
-                    android:textColorHint="#00000000"
-                    android:textSize="24sp" />
+                    <TextView
+                        android:id="@+id/itemPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="26dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_toRightOf="@id/itemQty"
+                        android:gravity="left"
+                        android:text="10"
+                        android:textColor="@color/textPrimary"
+                        android:textColorHint="#00000000"
+                        android:textSize="24sp" />
 
-                <TextView
-                    android:id="@+id/dollarSign"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="-24dp"
-                    android:layout_toLeftOf="@id/itemPrice"
-                    android:text="$"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="14sp" />
+                </RelativeLayout>
             </RelativeLayout>
+
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>

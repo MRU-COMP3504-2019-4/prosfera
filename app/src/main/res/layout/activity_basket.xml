@@ -54,18 +54,13 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/goBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/basketTotalPrice"
-            android:text="@string/backBtn_text" />
-
-        <Button
             android:id="@+id/Checkout"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:layout_below="@id/basketTotalPrice"
-            android:layout_toRightOf="@id/goBack"
+            android:layout_marginTop="25dp"
             android:text="@string/checkoutBtn_text" />
 
     </RelativeLayout>
