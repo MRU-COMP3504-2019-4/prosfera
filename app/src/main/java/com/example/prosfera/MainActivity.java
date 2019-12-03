@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+  
     @Override
     public void onResume(){
         super.onResume();
@@ -87,23 +87,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onFeaturedClick(View view){
-        Log.d(TAG, "onFeaturedClick: card clicked.");
-        Intent i = new Intent(this, Featured.class);
-
-        // instantiate view from which to grab data
-        //final TextView applesInput = findViewById(R.id.applesInput);
-
-        // convert data to string
-        //String usermessage = applesInput.getText().toString();
-
-        // passes this id of featured item to activity
-        // uses itemlist to grab item based on Id
-        i.putExtra("itemId", featuredItem.getItemID());
-
-        startActivity(i);
-    }
-
     // Populates featured item card with information
     private void initFeaturedItem(Item item) {
         // Note: Should featured item be removed from regular wishlist?
@@ -113,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView featuredDescription = findViewById(R.id.featuredDescription);
         final TextView featuredTitle = findViewById(R.id.featuredTitle);
         final ImageView featuredImage = findViewById(R.id.featuredPic);
+        final CardView featuredCard = findViewById(R.id.featuredCard);
 
         // set their contents
         featuredTitle.setText(item.getName());
@@ -123,7 +107,19 @@ public class MainActivity extends AppCompatActivity {
                 .into(featuredImage);
 
         // give featured parent an onclick
-        // Should we dispose of the text/image views after we're done using them? Probably?
+        featuredCard.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: featured item clicked");
+
+                Intent intent = new Intent(MainActivity.this, ItemDetails.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("itemObj", featuredItem);
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+            }
+        }));
     }
 
     @Override

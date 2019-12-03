@@ -19,8 +19,9 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="12dp"
             android:foregroundGravity="center_horizontal"
-            app:cardCornerRadius="2dp"
-            app:cardElevation="2dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
             app:contentPadding="16dp">
 
             <RelativeLayout
@@ -56,7 +57,7 @@
                     android:layout_centerVertical="false"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="34dp"
                     android:layout_toEndOf="@id/image"
                     android:layout_toRightOf="@+id/image" />
 
@@ -65,8 +66,8 @@
                     android:layout_width="40dp"
                     android:layout_height="50dp"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="-5dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="-3dp"
                     android:layout_toEndOf="@id/progressView"
                     android:layout_toRightOf="@+id/progressView"
                     android:ems="2"
@@ -79,22 +80,32 @@
                     android:text="1"
                     android:textColor="#919191"
                     android:textColorHint="#ADADAD"
-                    android:textSize="22sp" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/itemPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginTop="-5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="3dp"
                     android:layout_toEndOf="@id/itemQty"
                     android:layout_toRightOf="@+id/itemQty"
                     android:gravity="center"
                     android:text="10"
-                    android:textColor="#363636"
+                    android:textColor="@color/textPrimary"
                     android:textColorHint="#00000000"
-                    android:textSize="19sp"/>
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/dollarSign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="-24dp"
+                    android:layout_toLeftOf="@id/itemPrice"
+                    android:text="$"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="14sp" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
