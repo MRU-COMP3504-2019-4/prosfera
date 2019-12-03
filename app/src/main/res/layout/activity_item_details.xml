@@ -62,6 +62,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:layout_below="@id/details_item_name"
             android:text="bla bla bla" />
-    </LinearLayout>
+    </RelativeLayout>
 </ScrollView>
